@@ -11,13 +11,15 @@ pipeline {
             steps{
                 script {
                     gv = load "script.groovy"
-                }                
+                }//script             
             }//steps
         }//init stage
         stage("Build Application"){
             steps{
-                gv.buildTar()
-            }
-        }
+                script {
+                    gv.buildTar()
+                }//script         
+            }//steps
+        }//stage Build Application
     }//stages
 }//pipeline
