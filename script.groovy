@@ -3,4 +3,6 @@ def buildTar(){
     sh 'mkdir app'
     sh 'cp -R public views app.js package.json /app'
     sh 'tar -czvf app.tar.gz app'
-}
+}//buildTar
+
+return this
