@@ -1,10 +1,13 @@
 def buildTar(){
     echo "Building application tar file"
-    sh 'rm -r app'
+    //Remove app directory if it already exists
+    sh 'rm -r app' 
     sh 'mkdir app'
     sh 'cp -R public views app.js package.json app'
+    //remove tar file if it already exists
+    sh 'rm app.tar.gz'
     sh 'tar -czvf app.tar.gz app'
-    sh 'rm -f app'
+    sh 'rm -rf app'
 }//buildTar
 
 return this
