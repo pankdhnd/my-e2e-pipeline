@@ -1,0 +1,68 @@
+//Create VPC
+resource "aws_vpc" "app_vpc" {
+  cidr_block = var.vpc_cidr
+}
+
+//Create subnets within vpc
+resource "aws_subnet" "app_subnet" {
+  vpc_id     = aws_vpc.app_vpc.id
+  availability_zone = var.subnet_az
+  cidr_block = var.subnet_cidr
+  map_public_ip_on_launch = true
+  tags = local.common_tags
+}
+
+//Create internet gateway
+resource "aws_internet_gateway" "internet_gate" {
+  vpc_id = aws_vpc.app_vpc.id
+  tags = local.common_tags
+}
+
+//Create route table
+resource "aws_route_table" "my_route_table"{
+    vpc_id     = aws_vpc.app_vpc.id
+
+    route {
+        cidr_block = "0.0.0.0/0"
+        gateway_id = aws_internet_gateway.internet_gate.id
+    }
+    tags = local.common_tags
+}
+
+
+//Create EC2 instance
+resource "aws_instance" "app_ec2" {
+    ami = data.aws_ami.ami_id.id
+    instance_type = var.instanceType
+    subnet_id = aws_subnet.app_subnet.id
+    security_groups = [aws_security_group.ec2_security_group.id]
+    tags = local.common_tags
+    key_name = var.keyName
+}
+
+
+//Create security group for EC2
+resource "aws_security_group" "ec2_security_group" {
+    vpc_id = aws_vpc.app_vpc.id
+    ingress {
+    description      = "Allow HTTP traffic"
+    from_port        = 80
+    to_port          = 80
+    protocol         = "tcp"
+    cidr_blocks      = [var.public_cidr]
+  }
+  ingress {
+    description      = "Allow HTTP traffic"
+    from_port        = 8080
+    to_port          = 8080
+    protocol         = "tcp"
+    cidr_blocks      = [var.public_cidr]
+  }
+  ingress {
+    description      = "Allow SSH from my ip"
+    from_port        = 22
+    to_port          = 22
+    protocol         = "tcp"
+    cidr_blocks      = ["182.70.4.116/32"]
+  }
+}
