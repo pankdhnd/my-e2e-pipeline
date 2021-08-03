@@ -33,9 +33,8 @@ pipeline {
             steps{
                 script {                           
                             withCredentials([sshUserPrivateKey(credentialsId: 'ec2-private-key', keyFileVariable: 'keyFile', username: 'user' )]){
-                              sh "chmod 755 copyKey.sh"     
-                              sh "cp ${keyfile} ~/.ssh/ec2key.pem"                         
-                              //sh "./copyKey.sh ${keyFile}"
+                              sh "chmod 755 copyKey.sh"                             
+                              sh "./copyKey.sh ${keyFile}"
                             }     
                             dir('ansible_scripts'){                                                
                             gv.deployServer()
