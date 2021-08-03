@@ -23,7 +23,7 @@ pipeline {
             steps{
                 script {
                     dir('tf_scripts'){                        
-                        #gv.createAWSInfra()                        
+                        //gv.createAWSInfra()                        
                     }                    
                 }//script         
             }//steps
