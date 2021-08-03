@@ -1,3 +1,18 @@
+- name: Wait for ec2 instance to be ready
+  hosts: aws_ec2
+  gather_facts: false
+  tasks:
+  - name: Check if SSH port is open
+    waiit_for:
+      port: 22
+      delay: 20
+      timeout: 100
+      search_regex: OpenSSH
+      host: '{{ (ansible_ssh_host|default(ansible_host))|default(inventory_hostname) }}'
+    vars:
+    ansible_connection: local
+    ansible_python_interpreter: /usr/bin/python3
+
  - name: Deploy NodeJs application on remote machine
    hosts: aws_ec2
    become: True
@@ -13,7 +28,7 @@
 
 # Deploy nodejs application tar file
  - name: Deploy NodeJs application
-   hosts: local
+   hosts: aws_ec2
    vars_file:
    - ansible_vars
    tasks:

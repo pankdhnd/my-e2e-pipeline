@@ -19,7 +19,7 @@ def createAWSInfra(){
 
 def deployServer(){
     echo "Deploying server"
-    sh 'ansible-playbook'
+    sh 'ansible-playbook -i inventory_aws_ec2.yaml app-playbook.yaml'
 }
 
 return this

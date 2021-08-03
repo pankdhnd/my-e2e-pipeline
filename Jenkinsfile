@@ -32,7 +32,7 @@ pipeline {
         stage("Deploy Application"){
             steps{
                 script {
-                    dir('ansible'){                        
+                    dir('ansible_scripts'){                        
                         EC2_PUBLIC_IP = gv.createAWSInfra()
                         //echo "Public IP is ${EC2_PUBLIC_IP}"
                     }                    
