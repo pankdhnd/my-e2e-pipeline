@@ -82,7 +82,7 @@ resource "aws_security_group" "ec2_security_group" {
     from_port        = 22
     to_port          = 22
     protocol         = "tcp"
-    cidr_blocks      = ["182.70.4.116/32"]
+    cidr_blocks      = [var.my_ip,var.jenkins_ip]
   }
   tags = local.common_tags
 }
