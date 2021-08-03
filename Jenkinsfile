@@ -22,7 +22,9 @@ pipeline {
             steps{
                 script {
                     dir('tf_scripts'){
+                        def EC2_PUBLIC_IP = ""
                         gv.createAWSInfra()
+                        echo "Public IP is ${EC2_PUBLIC_IP}"
                     }                    
                 }//script         
             }//steps
