@@ -34,7 +34,7 @@ pipeline {
                 script {
                     dir('ansible_scripts'){                        
                         EC2_PUBLIC_IP = gv.createAWSInfra()
-                        //echo "Public IP is ${EC2_PUBLIC_IP}"
+                        echo "Public IP is ${EC2_PUBLIC_IP}"
                     }                    
                 }//script         
             }//steps
