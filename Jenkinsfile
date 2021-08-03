@@ -31,8 +31,7 @@ pipeline {
         }//stage Create AWS Infrastructure
         stage("Deploy Application"){
             steps{
-                script {
-                            dir('..')
+                script {                           
                             withCredentials([sshUserPrivateKey(credentialsId: 'ec2-private-key', keyFileVariable: 'keyFile', username: 'user' )]){
                               sh "pwd"
                               sh "chmod 755 copyKey.sh"                              
