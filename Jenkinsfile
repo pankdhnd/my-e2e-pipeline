@@ -21,7 +21,9 @@ pipeline {
         stage("Create AWS Infrastructure"){
             steps{
                 script {
-                    gv.createAWSInfra()
+                    dir('tf_scripts'){
+                        gv.createAWSInfra()
+                    }                    
                 }//script         
             }//steps
         }//stage Create AWS Infrastructure
