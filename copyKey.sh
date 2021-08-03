@@ -19,10 +19,10 @@ then
 fi
 
 #Create key if it does not exist
-if [[ ! -f $KEY_FILE_NAME ]]
+if [[ ! -f ~/.ssh/$KEY_FILE_NAME ]]
 then
     KEY=${1}
     #copy inputkey to .ssh location
-    cp ${1} ~/.ssh/ec2key.pem
+    cp ${1} ~/.ssh/$KEY_FILE_NAME
 fi
 
