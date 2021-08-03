@@ -11,7 +11,6 @@
       host: '{{ (ansible_ssh_host|default(ansible_host))|default(inventory_hostname) }}'
     vars: 
       ansible_connection: local
-      ansible_python_interpreter: /usr/bin/python3
 
 - name: Deploy NodeJs application on remote machine
   hosts: aws_ec2
