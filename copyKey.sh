@@ -10,7 +10,7 @@ fi
 
 
 #Specify ssh directory name
-DIR=.ssh
+DIR=~/.ssh
 KEY_FILE_NAME=ec2key.pem
 #Check if ssh directory exists. If yes, then delete the directory
 if [[ ! -d $DIR ]]
