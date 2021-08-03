@@ -45,6 +45,17 @@ variable public_cidr {
   default     = "0.0.0.0/0"
 }
 
+variable my_ip {
+  type        = string
+  default     = "182.70.4.116/32"
+}
+
+variable jenkins_ip {
+  type        = string
+  default     = "3.108.251.122/32"
+}
+
+
 locals {
   common_tags = {
     Name = "${var.env_prefix}-app"
