@@ -1,22 +1,21 @@
 - name: Wait for ec2 instance to be ready
   hosts: aws_ec2
-  gather_facts: false
-  tasks:
-  - name: Check if SSH port is open
-    waiit_for:
+  gather_facts: false  
+  tasks: 
+  - name: Wait for port 22 to be accessible
+    wait_for:
       port: 22
       delay: 20
       timeout: 100
       search_regex: OpenSSH
       host: '{{ (ansible_ssh_host|default(ansible_host))|default(inventory_hostname) }}'
-    vars:
-    ansible_connection: local
-    ansible_python_interpreter: /usr/bin/python3
+    vars: 
+      ansible_connection: local
+      ansible_python_interpreter: /usr/bin/python3
 
  - name: Deploy NodeJs application on remote machine
    hosts: aws_ec2
    become: True
-   #become_user: root   
    tasks:
    - name: Perform sudo apt update     
      apt: update_cache=yes force_apt_get=yes cache_valid_time=3600
