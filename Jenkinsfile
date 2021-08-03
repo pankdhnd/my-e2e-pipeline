@@ -32,8 +32,11 @@ pipeline {
         stage("Deploy Application"){
             steps{
                 script {
-                    dir('ansible_scripts'){                        
-                        gv.deployServer()
+                    dir('ansible_scripts'){         
+                    withCredentials([sshUserPrivateKey(credentialsId: 'ec2-private-key', keyFileVariable: 'keyFile', username: 'user' )]){
+                        sh "cp ${keyFile} ~/.ssh/ec2key.pem"
+                    }                
+                    gv.deployServer()
                     }                    
                 }//script         
             }//steps
