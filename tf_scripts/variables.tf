@@ -1,3 +1,9 @@
+variable env_prefix {
+  type        = string
+  default     = "test"
+  description = "environment prefix to be used in tags"
+}
+
 variable region {
   type        = string
   default     = "ap-south-1"
@@ -6,13 +12,12 @@ variable region {
 
 variable instanceType {
   type        = string
-  default     = "t2.nano"
+  default     = "t2.micro"
 }
 
 variable keyName {
   type        = string
   default     = "tf-study"
-  description = "description"
 }
 
 variable vpc_cidr {
@@ -37,6 +42,6 @@ variable public_cidr {
 
 locals {
   common_tags = {
-    ENV = "TEST"
+    Name = "${var.env_prefix}-test-app"
   }
 }
