@@ -7,6 +7,7 @@ resource "aws_vpc" "app_vpc" {
 resource "aws_subnet" "app_subnet" {
   vpc_id     = aws_vpc.app_vpc.id
   availability_zone = var.subnet_az
+  enable_dns_hostnames = true
   cidr_block = var.subnet_cidr
   map_public_ip_on_launch = true
   tags = local.common_tags
