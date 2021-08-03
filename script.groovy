@@ -7,7 +7,6 @@ def buildTar(){
 
 def createAWSInfra(){
     echo "Creating required AWS resources"
-    sh 'cd tf_scripts'
     sh 'terraform init'
     sh 'terraform plan'
     sh 'terraform apply --auto-approve'    
