@@ -1,13 +1,13 @@
 //Create VPC
 resource "aws_vpc" "app_vpc" {
   cidr_block = var.vpc_cidr
+  enable_dns_hostnames = true
 }
 
 //Create subnets within vpc
 resource "aws_subnet" "app_subnet" {
   vpc_id     = aws_vpc.app_vpc.id
-  availability_zone = var.subnet_az
-  enable_dns_hostnames = true
+  availability_zone = var.subnet_az  
   cidr_block = var.subnet_cidr
   map_public_ip_on_launch = true
   tags = local.common_tags

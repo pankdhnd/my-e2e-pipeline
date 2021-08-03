@@ -47,6 +47,6 @@ variable public_cidr {
 
 locals {
   common_tags = {
-    Name = "${var.env_prefix}-test-app"
+    Name = "${var.env_prefix}-app"
   }
 }
