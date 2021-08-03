@@ -4,7 +4,7 @@ terraform{
       key = "terraform.tfstate"
       region = "ap-south-1"
       dynamodb_table = "app-s3-tf-state-lock"
-      profile = "default"
+      profile = "test"
     }
     
 }
