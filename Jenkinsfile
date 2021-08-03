@@ -18,5 +18,12 @@ pipeline {
                 }//script         
             }//steps
         }//stage Build Application
+        stage("Create AWS Infrastructure"){
+            steps{
+                script {
+                    gv.createAWSInfra()
+                }//script         
+            }//steps
+        }//stage Create AWS Infrastructure
     }//stages
 }//pipeline

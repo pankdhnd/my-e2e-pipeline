@@ -18,16 +18,34 @@ resource "aws_internet_gateway" "internet_gate" {
   tags = local.common_tags
 }
 
+//Associate internet gateway with default route table in vpc
+resource "aws_default_route_table" "default_route_table"{
+  default_route_table_id = aws_vpc.app_vpc.default_route_table_id
+  route {
+        cidr_block = "0.0.0.0/0"
+        gateway_id = aws_internet_gateway.internet_gate.id
+    }
+  tags = local.common_tags
+}
+
+/*
 //Create route table
 resource "aws_route_table" "my_route_table"{
     vpc_id     = aws_vpc.app_vpc.id
-
     route {
         cidr_block = "0.0.0.0/0"
         gateway_id = aws_internet_gateway.internet_gate.id
     }
     tags = local.common_tags
 }
+
+//Associate route table with subnet
+resource "aws_route_table_association" "routetable-subnet"{
+  subnet_id = subnet_id = aws_subnet.app_subnet.id
+  my_route_table_id = aws_route_table.my_route_table.id 
+}
+
+*/
 
 
 //Create EC2 instance
@@ -65,4 +83,5 @@ resource "aws_security_group" "ec2_security_group" {
     protocol         = "tcp"
     cidr_blocks      = ["182.70.4.116/32"]
   }
+  tags = local.common_tags
 }
