@@ -7,14 +7,8 @@ def buildTar(){
 
 def createAWSInfra(){
     echo "Creating required AWS resources"
-    sh 'terraform init'
-    sh 'terraform plan'
-    sh 'terraform apply --auto-approve'
-    def EC2_IP = sh (
-        script: "terraform output ec2_public_ip",
-        returnStdout: true
-    ).trim()
-    return EC2_IP
+    sh 'chmod 755 terraform.sh'
+    sh './terraform.sh'
 }//createAWSInfra
 
 def deployServer(){
