@@ -1,4 +1,5 @@
 def gv
+def EC2_PUBLIC_IP
 pipeline {
     agent any
     //Maven is installed as a plugin and hence will not be available scripted pipeline, hence we have to add tools block to make it available
@@ -21,10 +22,19 @@ pipeline {
         stage("Create AWS Infrastructure"){
             steps{
                 script {
-                    dir('tf_scripts'){
-                        def EC2_PUBLIC_IP = ""
+                    dir('tf_scripts'){                        
                         EC2_PUBLIC_IP = gv.createAWSInfra()
-                        echo "Public IP is ${EC2_PUBLIC_IP}"
+                        //echo "Public IP is ${EC2_PUBLIC_IP}"
+                    }                    
+                }//script         
+            }//steps
+        }//stage Create AWS Infrastructure
+        stage("Deploy Application"){
+            steps{
+                script {
+                    dir('ansible'){                        
+                        EC2_PUBLIC_IP = gv.createAWSInfra()
+                        //echo "Public IP is ${EC2_PUBLIC_IP}"
                     }                    
                 }//script         
             }//steps

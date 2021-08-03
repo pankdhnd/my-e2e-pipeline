@@ -1,6 +1,6 @@
 variable aws_profile {
   type        = string
-  default     = "test"
+  default     = "default"
 }
 
 variable env_prefix {

@@ -17,4 +17,9 @@ def createAWSInfra(){
     return EC2_IP
 }//createAWSInfra
 
+def deployServer(){
+    echo "Deploying server"
+    sh 'ansible-playbook'
+}
+
 return this
