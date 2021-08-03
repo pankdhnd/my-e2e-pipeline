@@ -10,7 +10,11 @@ def createAWSInfra(){
     sh 'terraform init'
     sh 'terraform plan'
     sh 'terraform apply --auto-approve'
-    EC2_PUBLIC_IP = sh ("terraform output ec2_public_ip")
+    EC2_IP = sh (
+        script: "terraform output ec2_public_ip"
+        returnStdout: true
+    )
+    return EC2_IP
 }//createAWSInfra
 
 return this
