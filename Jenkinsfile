@@ -32,13 +32,15 @@ pipeline {
         stage("Deploy Application"){
             steps{
                 script {
-                            dir('ansible_scripts'){         
+                            dir('..')
                             withCredentials([sshUserPrivateKey(credentialsId: 'ec2-private-key', keyFileVariable: 'keyFile', username: 'user' )]){
-                            sh "chmod 755 copyKey.sh"
-                            sh "./copyKey.sh ${keyFile}"
-                        }                
-                        gv.deployServer()
-                    }                    
+                              sh "pwd"
+                              sh "chmod 755 copyKey.sh"                              
+                              sh "./copyKey.sh ${keyFile}"
+                            }     
+                            dir('ansible_scripts'){                                                
+                            gv.deployServer()
+                        }                    
                 }//script         
             }//steps
         }//stage Create AWS Infrastructure
