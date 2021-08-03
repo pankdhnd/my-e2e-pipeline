@@ -13,7 +13,7 @@ def createAWSInfra(){
     EC2_IP = sh (
         script: "terraform output ec2_public_ip"
         returnStdout: true
-    )
+    ).trim()
     return EC2_IP
 }//createAWSInfra
 
