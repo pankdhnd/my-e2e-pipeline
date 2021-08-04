@@ -18,7 +18,10 @@
 - name: Install NodeJS and npm
   hosts: aws_ec2
   become: True
-  become_method: sudo 
+  become_method: sudo
+  vars: 
+      ansible_connection: local
+      ansible_python_interpreter: /usr/bin/python3
   tasks:
   - name: Perform sudo apt update     
     apt: update_cache=yes force_apt_get=yes cache_valid_time=3600
@@ -31,6 +34,9 @@
 # Deploy nodejs application tar file
 - name: Deploy NodeJs application
   hosts: aws_ec2
+  vars: 
+      ansible_connection: local
+      ansible_python_interpreter: /usr/bin/python3
   vars_files:
   - ansible_vars.yaml
   tasks:
