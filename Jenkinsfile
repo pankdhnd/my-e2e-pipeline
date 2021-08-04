@@ -23,7 +23,7 @@ pipeline {
             steps{
                 script {
                     dir('tf_scripts'){                        
-                        //gv.createAWSInfra()                        
+                        EC2_PUBLIC_IP = gv.createAWSInfra()                        
                     }                    
                 }//script         
             }//steps
@@ -40,6 +40,13 @@ pipeline {
                         }                    
                 }//script         
             }//steps
-        }//stage Create AWS Infrastructure
+        }//stage Deploy Application
+        stage("Publish Application URL"){
+            steps{
+                script {                           
+                    sh 'echo "Application URL: http://${EC2_PUBLIC_IP}:3000"'                   
+                }//script         
+            }//steps
+        }//stage Publish Application URL
     }//stages
 }//pipeline
