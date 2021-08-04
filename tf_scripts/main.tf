@@ -65,22 +65,8 @@ resource "aws_security_group" "ec2_security_group" {
     vpc_id = aws_vpc.app_vpc.id
     ingress {
     description      = "Allow HTTP traffic"
-    from_port        = 80
-    to_port          = 80
-    protocol         = "tcp"
-    cidr_blocks      = [var.public_cidr]
-  }
-  ingress {
-    description      = "Allow HTTP traffic"
-    from_port        = 8080
-    to_port          = 8080
-    protocol         = "tcp"
-    cidr_blocks      = [var.public_cidr]
-  }
-  ingress {
-    description      = "Allow HTTP traffic"
-    from_port        = 443
-    to_port          = 443
+    from_port        = 3000
+    to_port          = 3000
     protocol         = "tcp"
     cidr_blocks      = [var.public_cidr]
   }
