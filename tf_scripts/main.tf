@@ -78,11 +78,25 @@ resource "aws_security_group" "ec2_security_group" {
     cidr_blocks      = [var.public_cidr]
   }
   ingress {
+    description      = "Allow HTTP traffic"
+    from_port        = 443
+    to_port          = 443
+    protocol         = "tcp"
+    cidr_blocks      = [var.public_cidr]
+  }
+  ingress {
     description      = "Allow SSH from my ip"
     from_port        = 22
     to_port          = 22
     protocol         = "tcp"
     cidr_blocks      = [var.my_ip,var.jenkins_ip]
+  }
+  egress {
+    description      = "Allow outboud connection to anywhere"
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-1"
+    cidr_blocks      = [var.public_cidr]
   }
   tags = local.common_tags
 }

@@ -4,6 +4,6 @@ data "aws_ami" "ami_id" {
 
   filter {
     name   = "name"
-    values = ["*ubuntu-focal*"]
+    values = ["*ubuntu-focal-*-amd64*"]
   }
 }
