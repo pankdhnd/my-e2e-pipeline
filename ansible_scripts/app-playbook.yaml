@@ -16,6 +16,7 @@
 - name: Deploy NodeJs application on remote machine
   hosts: aws_ec2
   become: True
+  become-method: sudo 
   tasks:
   - name: Perform sudo apt update     
     apt: update_cache=yes force_apt_get=yes cache_valid_time=3600
