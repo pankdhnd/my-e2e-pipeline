@@ -16,9 +16,8 @@ pipeline {
               environment {
                             scannerHome = tool 'Sonar'
             }
-            steps{
-                      
-                   }
+            steps{                      
+         
             }
         }//stage Build Application
         stage("Build Application"){
