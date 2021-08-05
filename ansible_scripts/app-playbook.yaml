@@ -40,7 +40,7 @@
   tasks:
   - name: Copy and unpack tar file
     unarchive:
-      src: "..{{NODE_PACKAGE_NAME}}"   #Source is local machine. Unarchieve will copy file to remote, and will then un-tar it.
+      src: "../{{NODE_PACKAGE_NAME}}"   #Source is local machine. Unarchieve will copy file to remote, and will then un-tar it.
       dest: "{{REMOTE_PATH}}"
   - name: Install dependencies using npm
     npm:
