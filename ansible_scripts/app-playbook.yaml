@@ -20,7 +20,6 @@
   become: True
  #become_method: sudo
   vars: 
-      ansible_connection: local
       ansible_python_interpreter: /usr/bin/python3
   tasks:
   - name: Perform sudo apt update     
