@@ -25,7 +25,7 @@ pipeline {
         stage("Build Application"){
             steps{
                 script {
-                    //gv.buildTar()
+                    gv.buildTar()
                 }//script         
             }//steps
         }//stage Build Application
@@ -33,7 +33,7 @@ pipeline {
             steps{
                 script {
                     dir('tf_scripts'){                        
-                        //EC2_PUBLIC_IP = gv.createAWSInfra()                        
+                        EC2_PUBLIC_IP = gv.createAWSInfra()                        
                     }                    
                 }//script         
             }//steps
