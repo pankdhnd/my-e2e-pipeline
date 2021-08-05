@@ -12,10 +12,26 @@ pipeline {
                 }//script             
             }//steps
         }//init stage
+        stage("Perform SonarQube scan"){
+            steps{
+                script {
+                    def scannerHome = tool 'Sonar';
+                      withSonarQubeEnv("sonarqube-container") {
+                        sh "${tool("sonarqube")}/bin/sonar-scanner \
+                            -Dsonar.projectKey=test-node-js \
+                            -Dsonar.sources=. \
+                            -Dsonar.css.node=. \
+                            -Dsonar.host.url=http://your-ip-here:9000 \
+                            -Dsonar.login=your-generated-token-from-sonarqube-container"
+                            }
+                    //gv.scanWithSonarQube()
+                }//script         
+            }//steps
+        }//stage Build Application
         stage("Build Application"){
             steps{
                 script {
-                    gv.buildTar()
+                    //gv.buildTar()
                 }//script         
             }//steps
         }//stage Build Application
@@ -23,7 +39,7 @@ pipeline {
             steps{
                 script {
                     dir('tf_scripts'){                        
-                        EC2_PUBLIC_IP = gv.createAWSInfra()                        
+                        //EC2_PUBLIC_IP = gv.createAWSInfra()                        
                     }                    
                 }//script         
             }//steps
@@ -36,7 +52,7 @@ pipeline {
                               sh "./copyKey.sh ${keyFile}"
                             }     
                             dir('ansible_scripts'){                                                
-                            gv.deployServer()
+                           // gv.deployServer()
                         }                    
                 }//script         
             }//steps
@@ -44,7 +60,7 @@ pipeline {
         stage("Publish Application URL"){
             steps{
                 script {                           
-                    echo "Application URL: http://${EC2_PUBLIC_IP}:3000"             
+                    println "Application URL: http://${EC2_PUBLIC_IP}:3000"             
                 }//script         
             }//steps
         }//stage Publish Application URL
