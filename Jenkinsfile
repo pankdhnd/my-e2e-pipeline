@@ -44,7 +44,7 @@ pipeline {
         stage("Publish Application URL"){
             steps{
                 script {                           
-                    echo "Application URL: http://${EC2_PUBLIC_IP}:3000"'               
+                    echo "Application URL: http://${EC2_PUBLIC_IP}:3000"             
                 }//script         
             }//steps
         }//stage Publish Application URL
