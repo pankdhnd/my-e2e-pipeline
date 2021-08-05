@@ -1,5 +1,6 @@
 def gv
 def EC2_PUBLIC_IP
+tools {SoSonarQubeScanner "SonarQubeScanner"}
 pipeline {
     agent any
     //Maven is installed as a plugin and hence will not be available scripted pipeline, hence we have to add tools block to make it available
