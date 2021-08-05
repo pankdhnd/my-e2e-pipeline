@@ -2,8 +2,7 @@ def gv
 def EC2_PUBLIC_IP
 pipeline {
     agent any
-    //Maven is installed as a plugin and hence will not be available scripted pipeline, hence we have to add tools block to make it available
-   
+    //Maven is installed as a plugin and hence will not be available scripted pipeline, hence we have to add tools block to make it available   
     stages{
         stage("init"){
             steps{
@@ -23,9 +22,8 @@ pipeline {
                         -Dsonar.css.node=. \
                         -Dsonar.host.url=http://your-ip-here:9000 \
                         -Dsonar.login=your-generated-token-from-sonarqube-container"
-               }
-                    }
-                }//script         
+                         }
+               }//script         
             }//steps
         }//stage SonarQube Scan        
         stage("Build Application"){
