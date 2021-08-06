@@ -54,7 +54,7 @@ resource "aws_instance" "app_ec2" {
     ami = data.aws_ami.ami_id.id
     instance_type = var.instanceType
     subnet_id = aws_subnet.app_subnet.id
-    security_groups = [aws_security_group.ec2_security_group.id]
+    vpc_security_group_ids = [aws_security_group.ec2_security_group.id]
     tags = local.common_tags
     key_name = var.keyName
 }
