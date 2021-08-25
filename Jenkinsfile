@@ -51,15 +51,17 @@ pipeline {
                               sh "./copyKey.sh ${keyFile}"
                             }     
                             dir('ansible_scripts'){                                                
-                           // gv.deployServer()
+                            gv.deployServer()
                         }                    
                 }//script         
             }//steps
         }//stage Deploy Application
         stage("Publish Application URL"){
             steps{
-                script {                           
-                    println "Application URL: http://${EC2_PUBLIC_IP}:3000"             
+                script {
+                    appurl = "http://${EC2_PUBLIC_IP}:3000"                        
+                    appurl = appurl.replace('"',"")
+                    println "Application URL: ${appurl}"             
                 }//script         
             }//steps
         }//stage Publish Application URL
