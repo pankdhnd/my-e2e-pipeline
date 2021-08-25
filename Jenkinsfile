@@ -18,6 +18,8 @@ pipeline {
         stage("SonarQube Scan"){
             steps{
                 script {
+                          env.JAVA_HOME="${tool 'openjdk_11_0_12'}"
+                          env.PATH="${env.JAVA_HOME}/bin:${env.PATH}"
                           def scannerHome = tool 'SonarQubeScanner';
                           withSonarQubeEnv() {
                           sh "${scannerHome}/bin/sonar-scanner"
